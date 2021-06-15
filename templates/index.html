@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Heatmap</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	</head>
+	<body>
+    	<div id="menu" style="text-align:center;">
+        	<select name="datasets" id="datasets">
+                <option value="arms_imports">Arms Transfer Data</option>
+                <option value="agriculture">Agriculture Data</option>
+            </select>
+    	</div>
+		<div id="chart" style="text-align:center;display:inline;">
+		   <object type="image/svg+xml" id="map" style="width:100%;height:70vh;" data="{{url_for('static', filename='maps/arms_imports/1950.svg')}}"></object>
+		</div>
+		<div id="map_img_div" style="text-align:center;display:none;">		
+        	<img id="map_img" style="width:100%;height:70vh;" src="{{url_for('static', filename='maps/arms_imports/1950.svg')}}">
+		</div>
+		<div>
+    		<h2 id="year">2000</h2>
+			<input type="range" min="1950" max="2020" value="50" style="width: 100%;text-align:center;" id="myRange">
+        </div>
+	</body>
+	<script>
+	    var slider = document.getElementById("myRange");
+   		var output = document.getElementById("year");
+   		var select = document.getElementById("datasets")
+		year.innerHTML = slider.value;
+		var year_val = 1950		
+		slider.oninput = function() {
+    		select = document.getElementById("datasets")
+    		index = select.selectedIndex;
+    		console.log(index)
+    		dataset = select.options[index].value
+            console.log(dataset)
+    		document.getElementById("chart").style.display = "none"
+    		document.getElementById("map_img_div").style.display = "inline"
+			year.innerHTML = this.value
+			year_val = this.value
+			document.getElementById("map_img").src = "/static/maps/" + dataset + "/" + this.value + ".svg"
+	    }
+	    slider.onchange = function() {
+    	    select = document.getElementById("datasets")
+    	    index = select.selectedIndex;
+    	    console.log(index)
+    		dataset = select.options[index].value
+            console.log(dataset)
+            document.getElementById("map_img_div").style.display = "none"
+			document.getElementById("chart").style.display = "inline"
+	        document.getElementById("map").data = "/static/maps/"  + dataset + "/" + year_val + ".svg"
+	        console.log(year_val)
+	    }
+	</script>
+</html>
+
+</html>
