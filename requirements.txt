@@ -3,3 +3,4 @@ pygal
 pycountry
 pycountry_convert
 pandas
+gunicorn
