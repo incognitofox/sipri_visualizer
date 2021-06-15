@@ -1,0 +1,5 @@
+flask
+pygal
+pycountry
+pycountry_convert
+pandas
